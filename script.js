@@ -35,11 +35,14 @@ function game(){
     let playerScore = 0;
 
     for(let i=0;i<5;i++){
-        if(oneRound(prompt("Rock, Paper, Scissors")) == 0){
+        let n = prompt("Rock, Paper, Scissors");
+        if(oneRound(n) == 0){
             console.log("Tie")
-        }else if(oneRound(prompt("Rock, Paper, Scissors")) == 1){
+        }else if(oneRound(n) == 1){
+            console.log("Computer wins");
             compScore += 1;
         }else{
+            console.log("Player wins");
             playerScore += 1;
         }
     }

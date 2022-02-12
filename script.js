@@ -2,6 +2,10 @@ const rockBtn = document.querySelector('#rock');
 const paperBtn = document.querySelector('#paper');
 const scissorsBtn = document.querySelector('#scissors');
 const display = document.querySelector('.display');
+const score = document.querySelector('.score');
+const p = document.createElement('p');
+display.appendChild(p);
+
 
 rockBtn.addEventListener('click',() => oneRound("ROCK", computerPlay()));
 paperBtn.addEventListener('click',() => oneRound("PAPER", computerPlay()));
@@ -9,6 +13,7 @@ scissorsBtn.addEventListener('click',() => oneRound("SCISSORS", computerPlay()))
 
 let playerScore = 0;
 let compScore = 0;
+let result
 
 function computerPlay(){
     let n = Math.floor(Math.random()*3);
@@ -26,25 +31,21 @@ function computerPlay(){
     }
 };
 
-function oneRound(playerSelection, computerSelection){
+function oneRound(playerSelection, computerSelection){    
     if(computerSelection == playerSelection){
-        const p = document.createElement('p');
-        p.textContent="Its a tie"
-        display.appendChild(p);
+        p.textContent = "Its a tie";
+        gameOver(playerScore,compScore);
         console.log("Tie",playerSelection,computerSelection);
     }else if(
         (computerSelection == "ROCK" && playerSelection == "SCISSORS") || 
         (computerSelection == "SCISSORS" && playerSelection == "PAPER") || 
         (computerSelection == "PAPER" && playerSelection == "ROCK")
-    ) {const p = document.createElement('p');
-    p.textContent="Comp wins"
-    display.appendChild(p);
+    ) {
+    p.textContent="Comp wins";
     compScore += 1;
     gameOver(playerScore, compScore);
         console.log("Comp wins",playerSelection,computerSelection);}else{
-            const p = document.createElement('p');
-        p.textContent="Player wins"
-        display.appendChild(p);
+        p.textContent="Player wins";
         playerScore += 1;
         gameOver(playerScore, compScore);
             console.log("Player wins",playerSelection,computerSelection);
@@ -52,11 +53,13 @@ function oneRound(playerSelection, computerSelection){
     
 }
 
-function gameOver(playerScore, compScore){
-    if(playerScore == 5 || compScore == 5){
+function gameOver(score1, score2){
+    console.log(playerScore,compScore)
+    score.textContent = playerScore + " " + compScore;
+    if(score1 == 5 || score2 == 5){
         playerScore = 0;
         compScore = 0;
-        alert("Game over");
+        score.textContent = "Game over";
     }
 }
 /*
